@@ -2,10 +2,10 @@ package TuFixTu.FixtureArg.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import TuFixTu.FixtureArg.models.Equipo;
-import TuFixTu.FixtureArg.repository.IEquipoRepository;
+
 
 
 
