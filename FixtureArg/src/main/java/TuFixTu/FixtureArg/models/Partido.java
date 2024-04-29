@@ -33,6 +33,9 @@ public class Partido {
 
     private boolean ganaVisitante;
 
+      @ManyToOne
+      @JoinColumn(name = "fecha_id")
+      private Fecha fecha;
 
     
 }
