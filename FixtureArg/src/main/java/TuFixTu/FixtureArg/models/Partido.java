@@ -1,14 +1,12 @@
 package TuFixTu.FixtureArg.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter @Setter
 @AllArgsConstructor
@@ -17,25 +15,23 @@ import java.util.Set;
 @Table(name = "partidos")
 public class Partido {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToMany
-    @JoinTable(name = "partido_equipo",
-    joinColumns = @JoinColumn(name = "partido_id"),
-    inverseJoinColumns = @JoinColumn(name = "equipo_id"))
-    private Set<Equipo> equipos = new HashSet<>();
+  @ManyToOne
+  @JoinColumn(name = "equipo_local_id")
+  private Equipo idEquipoLocal;
 
-    private String nombre;
+  @ManyToOne
+  @JoinColumn(name = "equipo_visitante_id")
+  private Equipo idEquipoVisitante;
 
-    private boolean ganaLocal;
+  private boolean ganaLocal;
+  private boolean ganaVisitante;
 
-    private boolean ganaVisitante;
+  @ManyToOne
+  @JoinColumn(name = "fecha_id")
+  private Fecha fechaId;
 
-      @ManyToOne
-      @JoinColumn(name = "fecha_id")
-      private Fecha fecha;
-
-    
 }

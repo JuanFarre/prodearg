@@ -3,6 +3,8 @@ package TuFixTu.FixtureArg.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +29,9 @@ public class Fecha {
     private Long id;
     private String nombre;
 
-    @OneToMany(mappedBy = "fecha", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fechaId", cascade = CascadeType.ALL)
+    @JsonIgnore
+
     private Set<Partido> partidos = new HashSet<>();
     
 }

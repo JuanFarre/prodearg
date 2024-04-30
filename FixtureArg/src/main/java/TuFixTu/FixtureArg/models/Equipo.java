@@ -18,14 +18,19 @@ import lombok.Setter;
 @Table(name = "equipos")
 public class Equipo {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nombre;
 
-    @ManyToMany(mappedBy = "equipos", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idEquipoLocal", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Set<Partido> partidos = new HashSet<>();
+    private Set<Partido> partidosComoLocal = new HashSet<>();
+
+    @OneToMany(mappedBy = "idEquipoVisitante", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Partido> partidosComoVisitante = new HashSet<>();
+
     
 }
