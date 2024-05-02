@@ -58,5 +58,11 @@ public class PartidoService implements IPartidoService {
        
 
     }
+
+    @Override
+    public List<Partido> findByFechaIdId(Long fechaId){
+
+        return partidoRepository.findByFechaIdId(fechaId);
+    }
     
 }

@@ -41,6 +41,16 @@ public class PartidoController {
     public List<Partido> getListPartido(){
         return partidoService.getListPartido();
     }
+    @GetMapping("/list/fecha/{id}")
+    public List<Partido> getListPartidoByFechaId(@PathVariable Long id){
+
+        return partidoService.findByFechaIdId(id);
+
+
+    }
+        
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Partido> getPartidoById(@PathVariable Long id){

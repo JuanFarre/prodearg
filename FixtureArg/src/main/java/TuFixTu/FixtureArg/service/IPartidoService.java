@@ -8,6 +8,8 @@ public interface IPartidoService {
     
     public List<Partido> getListPartido();
 
+    public List<Partido> findByFechaIdId(Long fechaId);
+
     public Partido getPartido(Long id);
 
     public String deletePartido(Long id);
