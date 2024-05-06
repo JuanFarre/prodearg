@@ -1,6 +1,11 @@
 package TuFixTu.FixtureArg.models;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,5 +38,9 @@ public class Partido {
   @ManyToOne
   @JoinColumn(name = "fecha_id")
   private Fecha fechaId;
+
+  @OneToMany(mappedBy = "partido", cascade = CascadeType.ALL)
+  @JsonIgnore
+  private Set<Pronostico> pronosticos = new HashSet<>();
 
 }
