@@ -1,7 +1,9 @@
 package TuFixTu.FixtureArg.models;
 
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,7 +40,7 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Pronostico> pronosticos;
+    private Set<Pronostico> pronosticos = new HashSet<>();
 
 
 

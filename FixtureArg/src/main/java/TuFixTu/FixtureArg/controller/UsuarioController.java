@@ -1,7 +1,16 @@
 package TuFixTu.FixtureArg.controller;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import TuFixTu.FixtureArg.dto.UsuarioPuntuacionDTO;
+import TuFixTu.FixtureArg.models.Fecha;
+import TuFixTu.FixtureArg.models.Partido;
+import TuFixTu.FixtureArg.models.Pronostico;
+import TuFixTu.FixtureArg.service.IFechaService;
+import TuFixTu.FixtureArg.service.IPartidoService;
+import TuFixTu.FixtureArg.service.IPronosticoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +33,16 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService; // Cambio de servicio a IUsuarioService
 
+    @Autowired
+    private IPronosticoService pronosticoService;
+
+    @Autowired
+    private IPartidoService partidoService;
+
+    @Autowired
+    private IFechaService fechaService;
+
+
     @PostMapping("/crear") // Cambio de ruta a "/crear"
     public ResponseEntity<Usuario> saveUsuario(@RequestBody Usuario usuario) {
 
@@ -35,6 +54,23 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/tabla-puntuacion")
+    public List<UsuarioPuntuacionDTO> obtenerTablaPuntuacion(){
+        List<Usuario> usuarios = usuarioService.getListUsuarios();
+
+        List<UsuarioPuntuacionDTO> tablaPuntuacion = new ArrayList<>();
+
+        for (Usuario user : usuarios){
+            int puntaje = pronosticoService.calcularPuntosByIdUsuario(user.getId());
+            tablaPuntuacion.add(new UsuarioPuntuacionDTO(user.getId(), user.getNombreUsuario(), puntaje));
+        }
+        tablaPuntuacion.sort(Comparator.comparingInt(UsuarioPuntuacionDTO::getPuntaje).reversed());
+        return tablaPuntuacion;
+    }
+
+
+
 
     @GetMapping("/list") // Cambio de ruta a "/list"
     public List<Usuario> getListUsuarios() {
@@ -74,4 +110,6 @@ public class UsuarioController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }

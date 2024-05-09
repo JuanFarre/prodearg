@@ -1,7 +1,9 @@
 package TuFixTu.FixtureArg.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import TuFixTu.FixtureArg.dto.UsuarioPuntuacionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,14 +43,15 @@ public class PartidoController {
     public List<Partido> getListPartido(){
         return partidoService.getListPartido();
     }
+
+
     @GetMapping("/list/fecha/{id}")
     public List<Partido> getListPartidoByFechaId(@PathVariable Long id){
 
         return partidoService.findByFechaIdId(id);
 
-
     }
-        
+
 
 
 

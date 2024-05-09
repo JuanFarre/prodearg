@@ -2,6 +2,7 @@ package TuFixTu.FixtureArg.controller;
 
 import java.util.List;
 
+import TuFixTu.FixtureArg.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class PronosticoController {
 
     @Autowired
     private IPronosticoService pronosticoService; // Cambio de servicio a IPronosticoService
+
 
     @PostMapping("/crear") // Cambio de ruta a "/crear"
     public ResponseEntity<Pronostico> savePronostico(@RequestBody Pronostico pronostico) {
@@ -73,5 +75,14 @@ public class PronosticoController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/puntaje/{id}")
+    public int calcularPuntosByIdUsuario(@PathVariable Long id){
+
+        return pronosticoService.calcularPuntosByIdUsuario(id);
+
+
+
     }
 }

@@ -33,7 +33,7 @@ public class PartidoService implements IPartidoService {
         
         partidoRepository.deleteById(id);
 
-        return "Equipo borrado";
+        return "Partido borrado";
 
     }
 

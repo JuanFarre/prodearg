@@ -31,7 +31,6 @@ public class Fecha {
 
     @OneToMany(mappedBy = "fechaId", cascade = CascadeType.ALL)
     @JsonIgnore
-
     private Set<Partido> partidos = new HashSet<>();
     
 }

@@ -2,6 +2,8 @@ package TuFixTu.FixtureArg.service;
 
 import java.util.List;
 
+import TuFixTu.FixtureArg.models.Usuario;
+import TuFixTu.FixtureArg.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,10 @@ import TuFixTu.FixtureArg.repository.IPronosticoRepository;
 @Service
 public class PronosticoService implements IPronosticoService { 
     @Autowired
-    private IPronosticoRepository pronosticoRepository; 
+    private IPronosticoRepository pronosticoRepository;
+
+    @Autowired
+    private IUsuarioRepository usuarioRepository;
 
     @Override
     public List<Pronostico> getListPronosticos() { 
@@ -49,5 +54,19 @@ public class PronosticoService implements IPronosticoService {
         }
 
         return null; 
+    }
+
+    @Override
+    public int calcularPuntosByIdUsuario(Long id) {
+        int puntuacion =0;
+        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        for(Pronostico pronostico : usuario.getPronosticos()){
+            if(pronostico.isGanaLocal() == pronostico.getPartido().isGanaLocal() &&
+               pronostico.isGanaVisitante() == pronostico.getPartido().isGanaVisitante()){
+                puntuacion++;
+            }
+
+        }
+        return puntuacion;
     }
 }
