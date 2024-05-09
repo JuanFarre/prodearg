@@ -68,6 +68,19 @@ public class UsuarioController {
         tablaPuntuacion.sort(Comparator.comparingInt(UsuarioPuntuacionDTO::getPuntaje).reversed());
         return tablaPuntuacion;
     }
+    @GetMapping("/tabla-puntuacion/{fechaId}")
+    public List<UsuarioPuntuacionDTO> obtenerTablaPuntuacionPorFecha(@PathVariable Long fechaId) {
+        List<Usuario> usuarios = usuarioService.getListUsuarios();
+        List<UsuarioPuntuacionDTO> tablaPuntuacion = new ArrayList<>();
+
+        for (Usuario user : usuarios) {
+            int puntaje = pronosticoService.calcularPuntosByIdUsuarioYFecha(user.getId(), fechaId);
+            tablaPuntuacion.add(new UsuarioPuntuacionDTO(user.getId(), user.getNombreUsuario(), puntaje));
+        }
+
+        tablaPuntuacion.sort(Comparator.comparingInt(UsuarioPuntuacionDTO::getPuntaje).reversed());
+        return tablaPuntuacion;
+    }
 
 
 

@@ -19,5 +19,8 @@ public interface IPronosticoService {
     Pronostico editPronostico(Long id, Pronostico pronostico);
 
     int calcularPuntosByIdUsuario (Long id);
+    public int calcularPuntosByIdUsuarioYFecha(Long usuarioId, Long fechaId);
+
+    List<Pronostico> findByUsuarioIdAndPartidoFechaIdId(Long usuarioId, Long fechaId);
     
 }

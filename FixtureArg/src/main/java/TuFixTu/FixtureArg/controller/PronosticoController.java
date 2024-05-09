@@ -82,7 +82,21 @@ public class PronosticoController {
 
         return pronosticoService.calcularPuntosByIdUsuario(id);
 
+    }
 
+    @GetMapping("/usuario/{usuarioId}/fecha/{fechaId}")
+    public ResponseEntity<List<Pronostico>> findByUsuarioIdAndPartidoFechaId(
+            @PathVariable("usuarioId") Long usuarioId,
+            @PathVariable("fechaId") Long fechaId) {
+        List<Pronostico> pronosticos = pronosticoService.findByUsuarioIdAndPartidoFechaIdId(usuarioId, fechaId);
+        return ResponseEntity.ok(pronosticos);
+    }
 
+    @GetMapping("/puntos/usuario/{usuarioId}/fecha/{fechaId}")
+    public ResponseEntity<Integer> calcularPuntosByIdUsuarioYFecha(
+            @PathVariable("usuarioId") Long usuarioId,
+            @PathVariable("fechaId") Long fechaId) {
+        int puntajeTotal = pronosticoService.calcularPuntosByIdUsuarioYFecha(usuarioId, fechaId);
+        return ResponseEntity.ok(puntajeTotal);
     }
 }
